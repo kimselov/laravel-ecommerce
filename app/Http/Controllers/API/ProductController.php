@@ -11,8 +11,19 @@ class ProductController extends Controller
      
      
      public function index(Request $request){
-         $products = Product::with(['category', 'brand'])->get();
-         return response()->json(["data" =>$products]);
+        $query = Product::with(['category', 'brand']);
+
+        if ($request->has('brand_id')) {
+            $query->where('brand_id', $request->brand_id);
+        }
+    
+        if ($request->has('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+    
+        $products = $query->get();
+    
+        return response()->json(["data" => $products]);
      }
 
      public function show(Request $request, string $id){
