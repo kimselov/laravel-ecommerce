@@ -22,6 +22,10 @@ Route::get('/user', function (Request $request) {
 
 
 
+Route::get('/products/featured', [ProductController::class, 'featured']);
+Route::get('/products/best-selling', [ProductController::class, 'bestSelling']);
+
+
 
 Route::post('login', [AuthController::class, 'login']);
 
